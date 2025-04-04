@@ -14,6 +14,7 @@ export class ImpuestosService {
   salario = signal<number>(0);
   impuesto = signal<number>(0);
   rangoUsuario = signal<string>('-');
+  error = signal<boolean>(false);
 
   salarioDeducido = computed(() => this.salario() - this.impuesto());
 
@@ -21,15 +22,26 @@ export class ImpuestosService {
     this.salario.set(0);
     this.impuesto.set(0);
     this.rangoUsuario.set('-');
+    this.error.set(false);
   }
 
   calcularImpuesto(salario: number) {
+    this.limpiar();
+
     const salarioAnual = salario * 12;
 
     console.log(salarioAnual);
 
-    if (salarioAnual <= PRIMER_RANGO.salarioMinimo) {
+    if (salario < 0) {
       this.salario.set(0);
+      this.impuesto.set(0);
+      this.rangoUsuario.set('-');
+      this.error.set(true);
+      return;
+    }
+
+    if (salarioAnual <= PRIMER_RANGO.salarioMinimo) {
+      this.salario.set(salario);
       this.impuesto.set(0);
       this.rangoUsuario.set('I');
     } else if (
