@@ -1,0 +1,199 @@
+<section class="min-h-screen bg-base-200 py-10 px-4">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10">
+      <div class="flex items-center justify-center gap-3 mb-2">
+        <h1 class="text-4xl font-bold text-primary-content">
+          <span class="inline-flex items-center gap-2">
+            <span
+              class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+            >
+              Calculadora de Impuestos a Salario
+            </span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="36"
+              height="36"
+              viewBox="0 0 24 24"
+              class="text-primary"
+            >
+              <path
+                fill="currentColor"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M5.5 3v5M8 5.5H3M8 16l-2 2m0 0l-2 2m2-2l2 2m-2-2l-2-2M20 6h-4m4 12.5h-4m4-3h-4m6-3.5H2m10 10V2"
+              />
+            </svg>
+          </span>
+        </h1>
+      </div>
+    </div>
+
+    <!-- Calculation Form Card -->
+    <div class="card bg-base-100 shadow-xl mb-8">
+      <div class="card-body">
+        <div class="form-control w-full mb-4">
+          <label class="label">
+            <span class="label-text text-lg font-medium">Sueldo:</span>
+          </label>
+          <div class="input-group">
+            <span class="bg-base-300 px-4 flex items-center text-base-content"
+              >$</span
+            >
+            <input
+              #txtSalario
+              type="number"
+              class="input input-bordered w-full focus:outline-primary"
+              placeholder="Ingrese su salario mensual"
+              (keyup.enter)="calcularImpuestos(+txtSalario.value)"
+            />
+          </div>
+        </div>
+
+        <button
+          class="btn btn-primary w-full sm:w-auto text-white"
+          (click)="calcularImpuestos(+txtSalario.value)"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="currentColor"
+              d="M7 2h10a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m0 2v4h10V4zm0 6v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2zm-8 4v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2zm-8 4v2h2v-2zm4 0v2h2v-2zm4 0v2h2v-2z"
+            />
+          </svg>
+          Calcular
+        </button>
+      </div>
+    </div>
+
+    <div class="card bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-2xl">Resultados</h2>
+
+        <div class="divider"></div>
+
+        <!-- User Range Card -->
+
+        <div
+          class="card bg-base-100 border border-base-300 shadow-sm hover:shadow-md transition-all duration-300 mb-6"
+        >
+          <div class="card-body p-4">
+            <div
+              class="flex flex-col md:flex-row items-center justify-between gap-2"
+            >
+              <div class="flex items-center gap-2">
+                <div class="placeholder">
+                  <div
+                    class="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center"
+                  >
+                    <span class="text-xl">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M6.5 7.5a5.5 5.5 0 1 1 11 0a5.5 5.5 0 0 1-11 0M3 19a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v3H3z"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+                <span class="text-lg font-medium">Rango de usuario</span>
+              </div>
+              <div class="flex-1 text-center text-right">
+                <span
+                  class="badge badge-lg badge-primary text-white px-4 py-3"
+                  >{{ impuestosService.rangoUsuario() }}</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div
+            class="stat bg-red-100 border-red-300 border rounded-box shadow-md hover:shadow-lg transition-all duration-300 animate-fadeIn"
+          >
+            <div class="stat-title text-red-800 flex">
+              <p class="text-xls">Impuesto DGII</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12.5 6.9c1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-.39.08-.75.21-1.1.36l1.51 1.51c.32-.08.69-.13 1.09-.13M5.47 3.92L4.06 5.33L7.5 8.77c0 2.08 1.56 3.22 3.91 3.91l3.51 3.51c-.34.49-1.05.91-2.42.91c-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c.96-.18 1.83-.55 2.46-1.12l2.22 2.22l1.41-1.41z"
+                />
+              </svg>
+            </div>
+            <div class="stat-value text-xl text-red-600">
+              $ {{ impuestosService.impuesto() | number }}
+            </div>
+            <div class="stat-desc"></div>
+          </div>
+
+          <div
+            class="stat bg-blue-100 border-blue-300 border rounded-box shadow-md hover:shadow-lg transition-all duration-300 animate-fadeIn"
+            style="animation-delay: 200ms"
+          >
+            <div class="stat-title text-blue-800 flex">
+              <p class="text-xs">Salario Base</p>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 640 512"
+              >
+                <path
+                  fill="currentColor"
+                  d="M621.16 54.46C582.37 38.19 543.55 32 504.75 32c-123.17-.01-246.33 62.34-369.5 62.34c-30.89 0-61.76-3.92-92.65-13.72c-3.47-1.1-6.95-1.62-10.35-1.62C15.04 79 0 92.32 0 110.81v317.26c0 12.63 7.23 24.6 18.84 29.46C57.63 473.81 96.45 480 135.25 480c123.17 0 246.34-62.35 369.51-62.35c30.89 0 61.76 3.92 92.65 13.72c3.47 1.1 6.95 1.62 10.35 1.62c17.21 0 32.25-13.32 32.25-31.81V83.93c-.01-12.64-7.24-24.6-18.85-29.47M48 132.22c20.12 5.04 41.12 7.57 62.72 8.93C104.84 170.54 79 192.69 48 192.69zm0 285v-47.78c34.37 0 62.18 27.27 63.71 61.4c-22.53-1.81-43.59-6.31-63.71-13.62M320 352c-44.19 0-80-42.99-80-96c0-53.02 35.82-96 80-96s80 42.98 80 96c0 53.03-35.83 96-80 96m272 27.78c-17.52-4.39-35.71-6.85-54.32-8.44c5.87-26.08 27.5-45.88 54.32-49.28zm0-236.11c-30.89-3.91-54.86-29.7-55.81-61.55c19.54 2.17 38.09 6.23 55.81 12.66z"
+                />
+              </svg>
+            </div>
+            <div class="stat-value text-xl text-blue-600">
+              $ {{ impuestosService.salario() | number }}
+            </div>
+            <div class="stat-desc"></div>
+          </div>
+
+          <div
+            class="stat bg-green-100 border-green-300 border rounded-box shadow-md hover:shadow-lg transition-all duration-300 animate-fadeIn"
+            style="animation-delay: 400ms"
+          >
+            <div class="stat-title text-green-800 flex">
+              <p class="text-xs">Salario Neto</p>
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                  d="M14.325 3.75h-4.65A3.75 3.75 0 0 1 6.75 6.675v.65a3.75 3.75 0 0 1 2.925 2.925h4.65a3.75 3.75 0 0 1 2.925-2.925v-.65a3.75 3.75 0 0 1-2.925-2.925m.605-1.497q-.412-.004-.878-.003H9.948q-.466 0-.877.003a1 1 0 0 0-.164.003c-.452.008-.853.027-1.201.074c-.628.084-1.195.27-1.65.725c-.456.456-.642 1.023-.726 1.65c-.047.349-.066.75-.074 1.202a1 1 0 0 0-.003.163q-.004.413-.003.878v.104q0 .465.003.878a1 1 0 0 0 .003.163c.008.453.027.853.074 1.201c.084.628.27 1.195.726 1.65c.455.456 1.022.642 1.65.726c.348.047.749.066 1.201.074a1 1 0 0 0 .164.003q.411.004.877.003h4.104q.465 0 .878-.003a1 1 0 0 0 .163-.003c.453-.008.854-.027 1.201-.074c.628-.084 1.195-.27 1.65-.726c.456-.455.642-1.022.726-1.65a11 11 0 0 0 .074-1.201a1 1 0 0 0 .003-.163q.004-.413.003-.878v-.104q0-.465-.003-.878a1 1 0 0 0-.003-.163a11 11 0 0 0-.074-1.201c-.084-.628-.27-1.195-.725-1.65c-.456-.456-1.023-.642-1.65-.726a11 11 0 0 0-1.202-.074a1 1 0 0 0-.163-.003m.964 1.541a2.26 2.26 0 0 0 1.312 1.312a5 5 0 0 0-.023-.2c-.061-.462-.169-.66-.3-.79s-.327-.237-.788-.3a5 5 0 0 0-.2-.022m1.312 5.1a2.26 2.26 0 0 0-1.312 1.312q.105-.01.2-.022c.462-.063.66-.17.79-.3s.238-.328.3-.79q.012-.095.022-.2m-9.1 1.312a2.26 2.26 0 0 0-1.312-1.312q.01.105.023.2c.062.462.169.66.3.79s.327.237.788.3q.096.012.201.022m-1.312-5.1a2.26 2.26 0 0 0 1.312-1.312q-.105.01-.2.023c-.462.062-.66.169-.79.3s-.237.327-.3.788zM12 6.75a.25.25 0 1 0 0 .5a.25.25 0 0 0 0-.5M10.25 7a1.75 1.75 0 1 1 3.5 0a1.75 1.75 0 0 1-3.5 0m-1.566 7.448c1.866-.361 3.863-.28 5.48.684c.226.135.44.304.625.512c.376.423.57.947.579 1.473q.286-.186.577-.407l1.808-1.365a2.64 2.64 0 0 1 3.124 0c.835.63 1.169 1.763.57 2.723c-.425.681-1.065 1.624-1.717 2.228c-.66.61-1.597 1.124-2.306 1.466c-.862.416-1.792.646-2.697.792c-1.85.3-3.774.254-5.602-.123a14.3 14.3 0 0 0-2.865-.293H4a.75.75 0 0 1 0-1.5h2.26c1.062 0 2.135.111 3.168.324a14.1 14.1 0 0 0 5.06.111c.828-.134 1.602-.333 2.284-.662c.683-.33 1.451-.764 1.938-1.215c.493-.457 1.044-1.248 1.465-1.922c.127-.204.109-.497-.202-.732c-.37-.28-.947-.28-1.316 0l-1.807 1.365c-.722.545-1.61 1.128-2.711 1.304a9 9 0 0 1-.347.048q-.086.015-.179.02a10 10 0 0 1-1.932 0a.75.75 0 1 1 .141-1.493a8.5 8.5 0 0 0 1.668-.003l.03-.003a.742.742 0 0 0 .15-1.138a1.2 1.2 0 0 0-.275-.222c-1.181-.705-2.759-.822-4.426-.5a12.1 12.1 0 0 0-4.535 1.935a.75.75 0 0 1-.868-1.224a13.6 13.6 0 0 1 5.118-2.183"
+                  clip-rule="evenodd"
+                />
+              </svg>
+            </div>
+            <div class="stat-value text-xl text-green-600">
+              $ {{ impuestosService.salarioDeducido() | number }}
+            </div>
+            <div class="stat-desc"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
