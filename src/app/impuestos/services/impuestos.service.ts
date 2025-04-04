@@ -17,6 +17,11 @@ export class ImpuestosService {
 
   salarioDeducido = computed(() => this.salario() - this.impuesto());
 
+  limpiar() {
+    this.salario.set(0);
+    this.impuesto.set(0);
+    this.rangoUsuario.set('-');
+  }
 
   calcularImpuesto(salario: number) {
     const salarioAnual = salario * 12;
@@ -43,7 +48,7 @@ export class ImpuestosService {
   }
 
   private calcularSegundoRango(salario: number) {
-    console.log("Segundo rango");
+    console.log('Segundo rango');
 
     const salarioAnual = salario * 12;
     const salarioAnualDeducido = salarioAnual - SEGUNDO_RANGO.salarioMinimo!;
@@ -56,7 +61,7 @@ export class ImpuestosService {
   }
 
   private calcularTercerRango(salario: number) {
-    console.log("Tercer rango");
+    console.log('Tercer rango');
 
     const salarioAnual = salario * 12;
     const salarioAnualDeducido = salarioAnual - TERCER_RANGO.salarioMinimo!;
@@ -70,18 +75,16 @@ export class ImpuestosService {
   }
 
   private calcularCuartoRango(salario: number) {
-    console.log("Cuarto rango");
+    console.log('Cuarto rango');
 
     const salarioAnual = salario * 12;
     const salarioAnualDeducido = salarioAnual - CUARTO_RANGO.salarioMinimo!;
     const impuestoSalarioAnual =
       (salarioAnualDeducido + CUARTO_RANGO.deduccion!) * CUARTO_RANGO.tasa!;
-    const salarioAnualDeducidoMensual = salarioAnualDeducido / 12;
+    const salarioAnualDeducidoMensual = impuestoSalarioAnual / 12;
 
     this.salario.set(salario);
     this.impuesto.set(salarioAnualDeducidoMensual);
     this.rangoUsuario.set('IV');
-
-    return impuestoSalarioAnual / 12;
   }
 }

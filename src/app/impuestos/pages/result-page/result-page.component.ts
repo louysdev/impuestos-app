@@ -13,4 +13,5 @@ export class ResultPageComponent {
   calcularImpuestos(salarioBase: number): void {
     this.impuestosService.calcularImpuesto(salarioBase);
   }
+
 }
