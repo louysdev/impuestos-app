@@ -78,7 +78,8 @@ export class ImpuestosService {
     const salarioAnual = salario * 12;
     const salarioAnualDeducido = salarioAnual - TERCER_RANGO.salarioMinimo!;
     const impuestoSalarioAnual =
-      (salarioAnualDeducido + TERCER_RANGO.deduccion!) * TERCER_RANGO.tasa!;
+      // (salarioAnualDeducido + TERCER_RANGO.deduccion!) * TERCER_RANGO.tasa!;
+      salarioAnualDeducido * TERCER_RANGO.tasa! + TERCER_RANGO.deduccion!;
     const salarioAnualDeducidoMensual = impuestoSalarioAnual / 12;
 
     this.salario.set(salario);
@@ -92,7 +93,7 @@ export class ImpuestosService {
     const salarioAnual = salario * 12;
     const salarioAnualDeducido = salarioAnual - CUARTO_RANGO.salarioMinimo!;
     const impuestoSalarioAnual =
-      (salarioAnualDeducido + CUARTO_RANGO.deduccion!) * CUARTO_RANGO.tasa!;
+      salarioAnualDeducido * CUARTO_RANGO.tasa! + CUARTO_RANGO.deduccion!;
     const salarioAnualDeducidoMensual = impuestoSalarioAnual / 12;
 
     this.salario.set(salario);
